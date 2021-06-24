@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 
-interface RefrofitApi {
+interface RetrofitApi {
 
     @GET("/api/")
     suspend fun imageSearch(
