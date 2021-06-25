@@ -25,6 +25,15 @@ class ViewModelClass @ViewModelInject constructor(private val repository: ArtRep
     get() = selectedImage
 
 
+    private var insertArtMsg = MutableLiveData<Resource<ImageResponse>>()
+    val insertArtMessage : LiveData<Resource<ImageResponse>>
+        get() = insertArtMsg
+
+    //Solving the navigation bug
+    fun resetInsertArtMsg() {
+        insertArtMsg = MutableLiveData<Resource<ImageResponse>>()
+    }
+
 //image detail
 
 
@@ -38,9 +47,21 @@ class ViewModelClass @ViewModelInject constructor(private val repository: ArtRep
         repository.insertArt(art)
     }
 
+    fun addArt(name: String,artistName:String,year:String ){
+        if(name.isEmpty() || artistName.isEmpty() || year.isEmpty()){
+            return
+        }
+        val yearInt = year.toInt()
+
+        val art = Image(null,name,artistName,yearInt,selectedImage.value?: "")
+        insertImage(art)
+        setSelectedImage("")
+    }
+
     fun deleteImage(art:Image)=viewModelScope.launch {
         repository.deleteArt(art)
     }
+
 
     fun searchForImage(imageName:String) =viewModelScope.launch {
         if(imageName.isEmpty()){
