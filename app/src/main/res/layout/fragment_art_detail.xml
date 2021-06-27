@@ -9,11 +9,12 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="226dp"
+        android:layout_width="270dp"
         android:layout_height="180dp"
-        android:layout_marginTop="47dp"
-        android:onClick="goImages"
         android:layout_marginLeft="80dp"
+        android:layout_marginTop="47dp"
+        android:visibility="visible"
+        android:onClick="goImages"
         tools:srcCompat="@tools:sample/cities" />
 
     <EditText

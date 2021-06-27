@@ -39,7 +39,7 @@ class ViewModelClassTest {
         //burası bize livedata veriri bu durum testlerde olmamalı burayı normal data ya çevirmemiz lazım
         //burada livedata olan verimizi normal data ya çeviririz
         val value = viewModelClass.insertArtMessage.getOrAwaitValueTest()
-        assertThat(value.status).isEqcd deualTo(Status.ERROR)
+        assertThat(value.status).isEqualTo(Status.ERROR)
 
     }
 

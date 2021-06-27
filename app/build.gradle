@@ -16,8 +16,10 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+       //bunun yerinde kendi runner'ımızı vereceğiz
+       // testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.example.artbookhilttesting.HiltTestRunner"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
