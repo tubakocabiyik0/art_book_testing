@@ -6,11 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.artbookhilttesting.model.Image
 import com.example.artbookhilttesting.model.ImageResponse
+import com.example.artbookhilttesting.repo.ArtRepoI
 import com.example.artbookhilttesting.repo.ArtRepository
 import com.example.artbookhilttesting.util.Resource
 import kotlinx.coroutines.launch
 
-class ViewModelClass @ViewModelInject constructor(private val repository: ArtRepository) :
+class ViewModelClass @ViewModelInject constructor(private val repository: ArtRepoI) :
     ViewModel() {
     //artview
     var artList = repository.getArt()
@@ -25,13 +26,14 @@ class ViewModelClass @ViewModelInject constructor(private val repository: ArtRep
     get() = selectedImage
 
 
-    private var insertArtMsg = MutableLiveData<Resource<ImageResponse>>()
-    val insertArtMessage : LiveData<Resource<ImageResponse>>
+    private var insertArtMsg = MutableLiveData<Resource<Image>>()
+    val insertArtMessage : LiveData<Resource<Image>>
         get() = insertArtMsg
 
     //Solving the navigation bug
     fun resetInsertArtMsg() {
-        insertArtMsg = MutableLiveData<Resource<ImageResponse>>()
+        insertArtMsg = MutableLiveData<Resource<Image>>()
+
     }
 
 //image detail
@@ -49,13 +51,16 @@ class ViewModelClass @ViewModelInject constructor(private val repository: ArtRep
 
     fun addArt(name: String,artistName:String,year:String ){
         if(name.isEmpty() || artistName.isEmpty() || year.isEmpty()){
+              insertArtMsg.postValue(Resource.error("Enter name, artist, year", null))
             return
+
         }
         val yearInt = year.toInt()
 
         val art = Image(null,name,artistName,yearInt,selectedImage.value?: "")
         insertImage(art)
         setSelectedImage("")
+        insertArtMsg.postValue(Resource.success(art))
     }
 
     fun deleteImage(art:Image)=viewModelScope.launch {

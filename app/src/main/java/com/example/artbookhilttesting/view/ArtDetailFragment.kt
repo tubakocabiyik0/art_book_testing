@@ -31,7 +31,7 @@ class ArtDetailFragment @Inject constructor(val glide:RequestManager ) : Fragmen
 
         binding.saveButton.setOnClickListener {
           viewModel.addArt(binding.editTextTextPersonName.text.toString(),binding.editTextTextPersonName2.text.toString(),binding.editTextTextPersonName3.text.toString())
-
+          findNavController().popBackStack()
         }
 
         var callback = object : OnBackPressedCallback(true) {
