@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ImageFragment @Inject constructor(
-    private val imageRecyclerAdapter: ImageRecyclerAdapter
+     val imageRecyclerAdapter: ImageRecyclerAdapter
 ) : Fragment(R.layout.fragment_image_api) {
     private var fragmentBinding: FragmentImageApiBinding? = null
     lateinit var viewModel: ViewModelClass
